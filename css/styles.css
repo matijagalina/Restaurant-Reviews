@@ -112,6 +112,9 @@ nav h1 a {
   width: 100%;
   min-height: 50px;
   background-color: #3397DB;
+  position: sticky;
+  top: -1px;
+  z-index: 2;
 }
 .filter-options h2 {
   color: white;
@@ -221,6 +224,9 @@ nav h1 a {
 /* ====================== Restaurant Details ====================== */
 .inside header {
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 .inside #map-container {
   height: 300px;
