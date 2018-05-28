@@ -294,7 +294,7 @@ nav h1 a {
     font-size: 20px;
   }
   #restaurant-hours td {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 #reviews-container h2 {
@@ -331,7 +331,7 @@ nav h1 a {
 
 @media screen and (max-width: 460px) {
   #reviews-list li p {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
