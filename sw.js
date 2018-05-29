@@ -1,10 +1,10 @@
-var cacheName = 'cache_v1';
+const cacheName = 'cache_v1';
 
-self.addEventListener('install', function (event) {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(cacheName)
-      .then(function (cache) {
-        console.log('Opened cache - ' + cacheName);
+      .then((cache) => {
+        console.log(`Opened cache - ${cacheName}`);
         return cache.addAll([
           '/',
           '/index.html',
@@ -15,25 +15,25 @@ self.addEventListener('install', function (event) {
           '/js/dbhelper.js'
         ]);
       })
-      .catch(function (er) {
-        console.log('error type - ' + er);
+      .catch((er) => {
+        console.log(`error type - ${er}`);
       })
   );
 });
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', (event) => {
   console.log('Service worker is activated');
 });
 
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
-      .then(function (fromCacheMatch) {
-        var fromNetwork = fetch(event.request)
-          .then(function (response) {
+      .then((fromCacheMatch) => {
+        const fromNetwork = fetch(event.request)
+          .then((response) => {
             var copyForCache = response.clone();
             caches.open(cacheName)
-              .then(function (cache) {
+              .then((cache) => {
                 if (event.request.url.startsWith('chrome-extension://')) {
                   return;
                 }
@@ -41,7 +41,7 @@ self.addEventListener('fetch', function (event) {
               });
             return response;
           })
-          .catch(function () {
+          .catch(() => {
             return new Response('<h1>We\'re sorry, the service is under mainteinance</h1>', {
               headers: new Headers({
                 'Content-Type': 'text/html'
