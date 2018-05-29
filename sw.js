@@ -28,7 +28,7 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request)
-      .then(function (fromCache) {
+      .then(function (fromCacheMatch) {
         var fromNetwork = fetch(event.request)
           .then(function (response) {
             var copyForCache = response.clone();
@@ -49,7 +49,7 @@ self.addEventListener('fetch', function (event) {
             });
           });
 
-        return fromCache || fromNetwork;
+        return fromCacheMatch || fromNetwork;
       })
   )
 });
