@@ -6,12 +6,14 @@ var markers = []
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+    navigator.serviceWorker.register('sw.js')
+    .then(function(registration) {
+      console.log('ServiceWorker registration was successful');
+    }, function(er) {
+      console.log('ServiceWorker registration failed - ' + er);
+    })
+    .catch(function(er) {
+      console.log('There was error during SW registration - ' + er);
     });
   });
 }
