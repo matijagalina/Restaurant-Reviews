@@ -31,7 +31,7 @@ self.addEventListener('fetch', (event) => {
       .then((fromCacheMatch) => {
         const fromNetwork = fetch(event.request)
           .then((response) => {
-            var copyForCache = response.clone();
+            const copyForCache = response.clone();
             caches.open(cacheName)
               .then((cache) => {
                 if (event.request.url.startsWith('chrome-extension://')) {
