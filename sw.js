@@ -1,4 +1,4 @@
-var cacheName = 'my-site-cache-v1';
+var cacheName = 'cache_v1';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
