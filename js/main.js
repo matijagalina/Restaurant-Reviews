@@ -5,16 +5,16 @@ var map
 var markers = []
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     navigator.serviceWorker.register('sw.js')
-    .then(function(registration) {
-      console.log('ServiceWorker registration was successful');
-    }, function(er) {
-      console.log('ServiceWorker registration failed - ' + er);
-    })
-    .catch(function(er) {
-      console.log('There was error during SW registration - ' + er);
-    });
+      .then(function (registration) {
+        console.log('ServiceWorker registration was successful');
+      }, function (er) {
+        console.log('ServiceWorker registration failed - ' + er);
+      })
+      .catch(function (er) {
+        console.log('There was error during SW registration - ' + er);
+      });
   });
 }
 
@@ -94,6 +94,10 @@ window.initMap = () => {
     center: loc,
     scrollwheel: false
   });
+  google.maps.event.addListener(self.map, "tilesloaded", function () {
+    document.querySelector('#map iframe').tabIndex = '-1';
+    document.querySelector('#map > div > div > div:nth-child(1)').tabIndex = '-1';
+  })
   updateRestaurants();
 }
 
@@ -174,6 +178,7 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute('aria-label', restaurant.name);
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
 

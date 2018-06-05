@@ -14,6 +14,10 @@ window.initMap = () => {
         center: restaurant.latlng,
         scrollwheel: false
       });
+      google.maps.event.addListener(self.map, "tilesloaded", function () {
+        document.querySelector('#map iframe').tabIndex = '-1';
+        document.querySelector('#map > div > div > div:nth-child(1)').tabIndex = '-1';
+      })
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
@@ -144,10 +148,11 @@ createReviewHTML = (review) => {
 /**
  * Add restaurant name to the breadcrumb navigation menu
  */
-fillBreadcrumb = (restaurant=self.restaurant) => {
+fillBreadcrumb = (restaurant = self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
   li.innerHTML = restaurant.name;
+  li.tabIndex = '0';
   breadcrumb.appendChild(li);
 }
 
